@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Author: Lennox Stampp
+Date:   12/30/2020
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe War</title>
+    <link href="tictacstyle.css" rel="stylesheet" />
+    <script src="tictactoe_gamestuff.js" defer></script>
+</head>
+<body onload="pickMarker1()">
+    <div id="hiddenSelect" onload="<!-- hide or unhide -->">
+        <h1>Select number of players</h1></br>
+        <button id="1playerMd" class="selectButton" onclick="playerSelect(this)">1 Player</button><button id="2playerMd" class="selectButton">2 Player</button>
+    </div>
+    <div class="gameboard"> <!--onclick="winCond(playerInput_array)" -->
+        <!--<script>
+            document.addEventListener("click",winCond(playerInput_array));
+        </script>-->
+        <div id="box1" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+            <!--1-->
+        </div>
+        <div id="box2" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+
+        </div>
+        <div id="box3" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+
+        </div>
+        <div id="box4" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+        </div>
+        <div id="box5" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+            <!--5-->
+        </div>
+        <div id="box6" class="box" onclick="playerMark(this)">
+            <!-- user input -->
+
+        </div>
+        <div id="box7"class="box" onclick="playerMark(this)">
+            <!-- user input -->
+        </div>
+        <div id="box8"class="box" onclick="playerMark(this)">
+            <!-- user input -->
+
+        </div>
+        <div id="box9"class="box" onclick="playerMark(this)">
+            <!-- user input -->
+            <!--9-->
+        </div>
+    </div>
+    <!--
+    <div id="player_select">
+        !-- js logic --
+    </div>
+    -->
+    <div class="flex_container">
+
+        <div id="player1_score" class="scoreboard">
+            <strong><u>Player 1</u></strong><br>Score:
+            <!-- js logic -->
+        </div>
+        <div id="game_stats" class="scoreboard">
+            Game Stats:
+        </div>
+        <div id="player2_score" class="scoreboard">
+            Player 2
+            <!-- js logic -->
+        </div>
+    </div>
+    <div id="temp" onmouseover="checkWin(playerInput_array)">
+        Temp to show vals or test scripts
+    </div>
+</body>
+</html>

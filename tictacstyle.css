@@ -1,0 +1,100 @@
+/*
+Author: Lennox Stampp
+Date: 12/30/2020
+ */
+
+html{
+    height: 100%;
+}
+
+body {
+    height: 98%;
+}
+
+.gameboard {
+    height: 50%;
+    width: auto;
+    display: grid;
+    grid-gap: 1%;
+    grid-template-columns: auto auto auto;
+    background: black;
+    margin: 3%;
+    border-radius: 100%;
+}
+
+.box {
+    background: darkorange;
+    text-align: center;
+    justify-items: center;
+    font-size: 10vh;
+}
+
+.box:hover {
+    border: solid red;
+}
+
+#box1 {
+    border-radius: 100% 0% 0% 0%;
+    background-image: radial-gradient(circle at bottom right,yellow, darkorange);
+}
+
+#box2 {
+    background-image: linear-gradient(to bottom,orange,yellow 80%);
+}
+
+#box3 {
+    border-radius: 0% 100% 0% 0%;
+    background-image: radial-gradient(circle at bottom left,yellow, darkorange);
+}
+
+#box4 {
+    background-image: linear-gradient(to right,orange,yellow 80%);
+}
+
+#box5 {
+    background: yellow;
+}
+
+#box6 {
+    background-image: linear-gradient(to left,orange,yellow 80%);
+}
+
+#box7 {
+    border-radius: 0% 0% 0% 100%;
+    background-image: radial-gradient(circle at top right,yellow, darkorange);
+}
+
+#box8 {
+    background-image: linear-gradient(to top,orange,yellow 80%);
+}
+
+#box9 {
+    border-radius: 0% 0% 100% 0%;
+    background-image: radial-gradient(circle at top left,yellow, darkorange);
+}
+
+.flex_container {
+    display:flex;
+    flex-wrap: nowrap;
+    height: 30%; /*might change later to 50%*/
+    width: auto;
+}
+
+.scoreboard {
+    display: flex;
+    border: solid red;
+    height: 30%;
+    width: 30%;
+    padding: 2%;
+    alignment: center;
+    text-align: center;
+    background-image: linear-gradient(to right, dodgerblue 0%, lightskyblue 80%, cornflowerblue 100%);
+    transition: all 1s ease-in-out;
+    border-radius: 25%;
+
+}
+
+.scoreboard:hover {
+    background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 20%, #DD5E89 100%);
+
+}
