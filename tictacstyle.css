@@ -11,6 +11,10 @@ body {
     height: 98%;
 }
 
+#unhide {
+    display: none;
+}
+
 .gameboard {
     height: 50%;
     width: auto;
@@ -25,7 +29,7 @@ body {
 .box {
     background: darkorange;
     text-align: center;
-    justify-items: center;
+    vertical-align: bottom;
     font-size: 10vh;
 }
 
@@ -89,7 +93,7 @@ body {
     alignment: center;
     text-align: center;
     background-image: linear-gradient(to right, dodgerblue 0%, lightskyblue 80%, cornflowerblue 100%);
-    transition: all 1s ease-in-out;
+    transition: all 2s ease-in-out;
     border-radius: 25%;
 
 }
