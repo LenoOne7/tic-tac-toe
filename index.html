@@ -61,12 +61,11 @@ Date:   12/30/2020
         !-- js logic --
     </div>
     -->
-    <div class="flex_container" onload="showGameStats()">
+    <div class="flex_container" onmouseover="showGameStats()">
 
         <div id="player1_score" class="scoreboard">
 
-            <table id="p1tbl">
-
+            <table>
                 <tr>
                     <th colspan="2"><h3>Player 1</h3></th>
                 </tr>
@@ -82,13 +81,11 @@ Date:   12/30/2020
                     <td>Draw:</td>
                     <td  id="ply1draw_data">0</td>
                 </tr>
-
             </table>
         </div>
         <div id="gamestat" class="scoreboard">
 
             <table>
-                <tbody>
                 <tr>
                     <th colspan="2"><h3>Game Stats</h3></th>
                 </tr>
@@ -104,7 +101,6 @@ Date:   12/30/2020
                     <td>Game Leader:</td>
                     <td  id="mostWonPlyr_data"></td>
                 </tr>
-                </tbody>
             </table>
         </div>
         <div id="player2_score" class="scoreboard">

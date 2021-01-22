@@ -212,39 +212,42 @@ function checkWin(object) {
         p2WinLossDraw[2] += 1;
     }
 
+    showGameStats();
+
 }
 
 // Game data
 function showGameStats() {
-    let table1 = document.getElementById("p1tbl");
-    let row = table1.insertRow(0);
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    cell1.innerHTML = "testing123";
-    cell2.innerHTML = "testing456";
-
-
-    /*
-    let td1win = document.createElement('td');
-    td1win.id = "ply1win_data1";
-    const test1 = "testing123"
-    let winNum = document.createTextNode('test1');
-    td1win.appendChild(winNum);
-    let oldtd1win = document.getElementById("ply1win_data");
-    let pNode = oldtd1win.parentNode;
-    pNode.replaceChild(td1win,oldtd1win);
-
-     */
-
-
-    /*
+    //Player 1 stats
     let sP1Win = p1WinLossDraw[0].toString();
     let p1win = document.getElementById("ply1win_data");
-    p1win.innerText = "testing1";
-    document.getElementById("ply1loss_data").innerHTML = p1WinLossDraw[1].toString();
-    document.getElementById("ply1draw_data").innerHTML = p1WinLossDraw[2].toString();
+    p1win.innerHTML = sP1Win;
+    let sP1Loss = p1WinLossDraw[1].toString();
+    let p1loss = document.getElementById("ply1loss_data");
+    p1loss.innerHTML = sP1Loss;
+    let sP1Draw = p1WinLossDraw[2].toString();
+    let p1Draw = document.getElementById("ply1draw_data");
+    p1Draw.innerHTML = sP1Draw;
 
-     */
+    //Player2 stats
+    let sP2Win = p2WinLossDraw[0].toString();
+    let p2win = document.getElementById("ply2win_data");
+    p2win.innerHTML = sP2Win;
+    let sP2Loss = p2WinLossDraw[1].toString();
+    let p2loss = document.getElementById("ply2loss_data");
+    p2loss.innerHTML = sP2Loss;
+    let sP2Draw = p2WinLossDraw[2].toString();
+    let p2Draw = document.getElementById("ply2draw_data");
+    p2Draw.innerHTML = sP2Draw;
+
+    //General game stats
+    let sGamePlayed = gameCount[0].toString();
+    let gp = document.getElementById("gamesPlayed_data");
+    gp.innerHTML = sGamePlayed;
+    let sGamesDraw = gameCount[1].toString();
+    let gd = document.getElementById("drawGames_data");
+    gd.innerHTML = sGamesDraw;
+
 }
 
 
