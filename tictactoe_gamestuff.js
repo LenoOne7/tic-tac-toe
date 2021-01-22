@@ -8,24 +8,27 @@ Date: 12/30/2020
 // Variables
 let player1Marker="X";                   //var for player1 input for marker val
 let player2Marker="O";                  //var for player2 input for marker val
-let playerInput_obj={box1:"", box2:"", box3:"", box4:"", box5:"", box6:"",
+let playerInput_obj = {box1:"", box2:"", box3:"", box4:"", box5:"", box6:"",
                         box7:"", box8:"", box9:""};     //object to keep track of user's moves on game board
-let result;
+let result = 0;
 let opponent;
 let turn = 0;                           //0 is player 1, 1 is player 2
 let turnCount = 0;                      //track number of moves
 let currentPlayer;                      //container
+let p1WinLossDraw = [0,0,0];                 //win,loss,draw data player1
+let p2WinLossDraw = [0,0,0];                 //win,loss,draw data player2
+let gameCount = [0,0];                      //games played, draw games
 
 
 //Functions
 
-//Chane display of parent element to hidden
+//Change display of parent element to hidden
 function hideParent(elem) {
     let parentElem = elem.parentElement;
     parentElem.style.display = "none";
 
 }
-
+//Reveal game board
 function unhideParent() {
     let parentElem = document.getElementById("unhide");
     parentElem.style.display = "grid";
@@ -96,7 +99,44 @@ function takeTurn() {
         currentPlayer = player2Marker;
         turn -= 1;
     }
+
+    //Highlight player who's turn it is currently
+    if (turn == 0) {
+        let parentElem = document.getElementById("player1_score");
+        parentElem.style.border = "solid green";
+        parentElem.style.boxShadow = "0px 10px 6px green";
+        let parentElem2 = document.getElementById("player2_score");
+        parentElem2.style.border = "solid red";
+        parentElem2.style.boxShadow = "none";
+    }   else if (turn == 1) {
+        let parentElem2 = document.getElementById("player2_score");
+        parentElem2.style.border = "solid green";
+        parentElem2.style.boxShadow = "0px 10px 6px green";
+        let parentElem = document.getElementById("player1_score");
+        parentElem.style.border = "solid red";
+        parentElem.style.boxShadow = "none";
+    }
+
     turnCount += 1;
+    console.log(turnCount,"turn count");
+    console.log(result, "result");
+}
+
+
+//reset game board
+function resetGame(plyr1array, plyr2array,plyrInput_obj) {
+    const gameBoard = ["box1", "box2","box3", "box4","box5", "box6","box7", "box8", "box9"];
+    for (let box in gameBoard) {
+        let gameBox = document.getElementById(gameBoard[box]);
+        gameBox.innerHTML = "";
+    }
+    plyr1array.splice(0, plyr1array.length);;
+    plyr2array.splice(0, plyr2array.length);
+    for (let val in plyrInput_obj) {
+        delete plyrInput_obj[val];
+    }
+    result = 0;
+    turnCount = 0;
 }
 
 //computer logic
@@ -105,27 +145,6 @@ function takeTurn() {
 //Check if one of eight ways to win
 function checkWin(object) {
     //win conditions
-    /*const win1=["box1","box2","box3"];
-    const win2=["box4","box5","box6"];
-    const win3=["box7","box8","box9"];
-    const win4=["box1","box4","box7"];
-    const win5=["box2","box5","box8"];
-    const win6=["box3","box6","box9"];
-    const win7=["box1","box5","box9"];
-    const win8=["box3","box5","box7"];
-
-     */
-
-    /*
-    const nWin1=[1,2,3];
-    const nWin2=[4,5,6];
-    const nWin3=[7,8,9];
-    const nWin4=[1,4,7];
-    const nWin5=[2,5,8];
-    const nWin6=[3,6,9];
-    const nWin7=[1,5,9];
-    const nWin8=[3,5,7];
-    */
 
     //RegEx search patterns for win conditions
     const regXWin1=/1.*\s*\w*2.*\s*\w*3/;
@@ -137,31 +156,6 @@ function checkWin(object) {
     const regXWin7=/1.*\s*\w*5.*\s*\w*9/;
     const regXWin8=/3.*\s*\w*5.*\s*\w*7/;
 
-    //const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-    //
-    //let sPlayerInput_array = array.sort().toString();
-    //let sPlayerInput_array=array.sort();
-    //window.alert(sPlayerInput_array);
-
-    /*
-    let regXnums = /1+,5+,9+/;      //regEx to search for specific numbers
-
-    let testSearch = regXnums.test(nWin7.toString())
-    if (testSearch) {
-        window.alert("regX win7!",console.log(sPlayerInput_array,nWin7.toString()));
-    }   else {
-        window.alert("still not working",console.log(sPlayerInput_array,"error"));
-    }
-    /*
-    //test***************currently works to compare arrays******************
-    if (sPlayerInput_array.includes(nWin2)) {
-        window.alert("regX win2!",console.log(sPlayerInput_array));
-    }   else {
-        window.alert("still not working",console.log(sPlayerInput_array,"error"));
-    }
-
-     */
 
     //put boxid selected by player into an array for each player
     let aPlayer1 = [];
@@ -176,12 +170,7 @@ function checkWin(object) {
             aPlayer2.push(box);
         }
     }
-    console.log(aPlayer1.toString());
-    console.log(aPlayer2);
-    //search player arrays to see if either has a win condition
-    /* let winArray;
-    winArray = [nWin1, nWin2, nWin3, nWin4, nWin5, nWin6, nWin7, nWin8];
-    */
+
     let regxArray;
     regxArray = [regXWin1,regXWin2,regXWin3,regXWin4,regXWin5,regXWin6,regXWin7,regXWin8];
 
@@ -192,6 +181,10 @@ function checkWin(object) {
         if (winSearch1) {
             window.alert("winner is Player1!!!");
             result = 1;
+            resetGame(aPlayer1,aPlayer2,playerInput_obj);
+            gameCount[0] += 1;
+            p1WinLossDraw[0] += 1;
+            p2WinLossDraw[1] += 1;
         } else {
             console.log("no match");
         }
@@ -200,59 +193,58 @@ function checkWin(object) {
         if (winSearch2) {
             window.alert("winner is Player2!!!");
             result = 2;
+            resetGame(aPlayer1,aPlayer2,playerInput_obj);
+            gameCount[0] += 1;
+            p2WinLossDraw[0] += 1;
+            p1WinLossDraw[1] += 1;
         } else {
             console.log("no match");
             continue;
         }
     }
 
+    if (turnCount == 9 && result == 0) {
+        window.alert("TIE GAME");
+        resetGame(aPlayer1,aPlayer2,playerInput_obj);
+        gameCount[0] += 1;
+        gameCount[1] += 1;
+        p1WinLossDraw[2] += 1;
+        p2WinLossDraw[2] += 1;
+    }
+
+}
+
+// Game data
+function showGameStats() {
+    let table1 = document.getElementById("p1tbl");
+    let row = table1.insertRow(0);
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
+    cell1.innerHTML = "testing123";
+    cell2.innerHTML = "testing456";
+
 
     /*
-    //burp
-    for (let winCon in winArray) {
-        for ( regEx in regxArray) {
-            let isMatch = regEx.test(winCon.toString());
-            if (isMatch) {
-                console.log("winner is:",)
-            }
-        }
-    }
+    let td1win = document.createElement('td');
+    td1win.id = "ply1win_data1";
+    const test1 = "testing123"
+    let winNum = document.createTextNode('test1');
+    td1win.appendChild(winNum);
+    let oldtd1win = document.getElementById("ply1win_data");
+    let pNode = oldtd1win.parentNode;
+    pNode.replaceChild(td1win,oldtd1win);
+
+     */
 
 
-    //win array
-    //const winArray=[win1,win2,win3,win4,win5,win6,win7,win8];
-    //let winArray;
-    //winArray = [nWin1, nWin2, nWin3, nWin4, nWin5, nWin6, nWin7, nWin8];
+    /*
+    let sP1Win = p1WinLossDraw[0].toString();
+    let p1win = document.getElementById("ply1win_data");
+    p1win.innerText = "testing1";
+    document.getElementById("ply1loss_data").innerHTML = p1WinLossDraw[1].toString();
+    document.getElementById("ply1draw_data").innerHTML = p1WinLossDraw[2].toString();
 
-    //check if array has a win condition
-    let win;
-    for (win in winArray) {     //check each win condition
-        //window.alert(win);
-        console.log(win);
-        if (sPlayerInput_array.includes(winArray[win])) {  //if win condition matches array
-            window.alert("winner!");
-            console.log(win,"win var");
-            console.log(winArray[win],"winArray[] value");
-            result = 1;         //winner!
-        }   else {
-                console.log("No win")
-                result = 0;       //not winner :-(
-        }
-    }
      */
 }
 
-//check for winner and declare winner
-function winCond(array) {
-    let check=0;
-    while(check != 1) {
-        onclick="check=checkWin(array)";
-        if (check == 1) {
-            window.alert("You win!");
-        }
-    }
-}
-
-
-// Main Game
 

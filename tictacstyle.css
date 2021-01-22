@@ -87,13 +87,14 @@ body {
 .scoreboard {
     display: flex;
     border: solid red;
-    height: 30%;
+    height: auto;
     width: 30%;
     padding: 2%;
     alignment: center;
+    align-items: center;
     text-align: center;
     background-image: linear-gradient(to right, dodgerblue 0%, lightskyblue 80%, cornflowerblue 100%);
-    transition: all 2s ease-in-out;
+    transition: all 1s ease-in-out;
     border-radius: 25%;
 
 }
@@ -101,4 +102,14 @@ body {
 .scoreboard:hover {
     background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 20%, #DD5E89 100%);
 
+}
+
+#player1_score {
+    box-shadow: 0px 10px 6px green;
+    border: solid green;
+}
+
+#player2_score {
+    box-shadow: none;
+    border: solid red;
 }

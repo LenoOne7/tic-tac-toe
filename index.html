@@ -55,24 +55,77 @@ Date:   12/30/2020
             <!--9-->
         </div>
     </div>
+</br>
     <!--
     <div id="player_select">
         !-- js logic --
     </div>
     -->
-    <div class="flex_container">
+    <div class="flex_container" onload="showGameStats()">
 
         <div id="player1_score" class="scoreboard">
-            <strong><u>Player 1</u></strong><br>
-            Score:
-            <!-- js logic -->
+
+            <table id="p1tbl">
+
+                <tr>
+                    <th colspan="2"><h3>Player 1</h3></th>
+                </tr>
+                <tr >
+                    <td>Win:</td>
+                    <td id="ply1win_data">0</td>
+                </tr>
+                <tr>
+                    <td>Loss:</td>
+                    <td  id="ply1loss_data">0</td>
+                </tr>
+                <tr>
+                    <td>Draw:</td>
+                    <td  id="ply1draw_data">0</td>
+                </tr>
+
+            </table>
         </div>
-        <div id="game_stats" class="scoreboard">
-            Game Stats:
+        <div id="gamestat" class="scoreboard">
+
+            <table>
+                <tbody>
+                <tr>
+                    <th colspan="2"><h3>Game Stats</h3></th>
+                </tr>
+                <tr>
+                    <td>Games Played:</td>
+                    <td  id="gamesPlayed_data"></td>
+                </tr>
+                <tr>
+                    <td>Draw Games:</td>
+                    <td  id="drawGames_data"></td>
+                </tr>
+                <tr>
+                    <td>Game Leader:</td>
+                    <td  id="mostWonPlyr_data"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div id="player2_score" class="scoreboard">
-            Player 2
-            <!-- js logic -->
+
+            <table>
+                <tr>
+                    <th colspan="2"><h3>Player 2</h3></th>
+                </tr>
+                <tr>
+                    <td>Win:</td>
+                    <td  id="ply2win_data"></td>
+                </tr>
+                <tr>
+                    <td>Loss:</td>
+                    <td  id="ply2loss_data"></td>
+                </tr>
+                <tr>
+                    <td>Draw:</td>
+                    <td  id="ply2draw_data"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div id="temp" onmouseover="checkWin(playerInput_obj)">
