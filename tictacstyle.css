@@ -40,41 +40,50 @@ body {
 #box1 {
     border-radius: 100% 0% 0% 0%;
     background-image: radial-gradient(circle at bottom right,yellow, darkorange);
+    justify-content: flex-end;
 }
 
 #box2 {
     background-image: linear-gradient(to bottom,orange,yellow 80%);
+    justify-content: flex-end;
 }
 
 #box3 {
     border-radius: 0% 100% 0% 0%;
     background-image: radial-gradient(circle at bottom left,yellow, darkorange);
+    justify-content: flex-end;
 }
 
 #box4 {
     background-image: linear-gradient(to right,orange,yellow 80%);
+
 }
 
 #box5 {
     background: yellow;
+    align-items: center;
 }
 
 #box6 {
     background-image: linear-gradient(to left,orange,yellow 80%);
+    align-items: initial;
 }
 
 #box7 {
     border-radius: 0% 0% 0% 100%;
     background-image: radial-gradient(circle at top right,yellow, darkorange);
+    align-items: flex-start;
 }
 
 #box8 {
     background-image: linear-gradient(to top,orange,yellow 80%);
+    align-items: flex-start;
 }
 
 #box9 {
     border-radius: 0% 0% 100% 0%;
     background-image: radial-gradient(circle at top left,yellow, darkorange);
+    align-items: flex-start;
 }
 
 .flex_container {

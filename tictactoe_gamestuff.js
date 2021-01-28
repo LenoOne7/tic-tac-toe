@@ -18,7 +18,17 @@ let currentPlayer;                      //container
 let p1WinLossDraw = [0,0,0];                 //win,loss,draw data player1
 let p2WinLossDraw = [0,0,0];                 //win,loss,draw data player2
 let gameCount = [0,0];                      //games played, draw games
-
+//RegEx search patterns for win conditions
+const regXWin1=/1.*\s*\w*2.*\s*\w*3/;
+const regXWin2=/4,*\s*\w*5.*\s*\w*6/;
+const regXWin3=/7.*\s*\w*8.*\s*\w*9/;
+const regXWin4=/1.*\s*\w*4.*\s*\w*7/;
+const regXWin5=/2.*\s*\w*5.*\s*\w*8/;
+const regXWin6=/3.*\s*\w*6.*\s*\w*9/;
+const regXWin7=/1.*\s*\w*5.*\s*\w*9/;
+const regXWin8=/3.*\s*\w*5.*\s*\w*7/;
+let regxArray = [regXWin1,regXWin2,regXWin3,regXWin4,regXWin5,regXWin6,
+    regXWin7,regXWin8];
 
 //Functions
 
@@ -53,9 +63,9 @@ function playerSelect(button) {
 //Player marker select
 //Loads after page is loaded
 function pickMarker1() {
-    let marker1 = prompt("Enter 1 or 2 characters for the marker for Player 1:");
+    let marker1 = prompt("Enter 1-3 characters for the marker for Player 1:");
     try {
-        marker1 = marker1.substr(0,2);
+        marker1 = marker1.substr(0,3);
     }   catch {
         marker1 = marker1.substr(0,1)
     }
@@ -65,9 +75,9 @@ function pickMarker1() {
     player1Marker = marker1;
 }
 function pickMarker2() {
-    let marker2 = prompt("Enter 1 or 2 characters for the marker for Player 2:");
+    let marker2 = prompt("Enter 1-3 characters for the marker for Player 2:");
     try {
-        marker2 = marker2.substr(0,2);
+        marker2 = marker2.substr(0,3);
     }   catch {
         marker2 = marker2.substr(0,1)
     }
@@ -130,11 +140,14 @@ function resetGame(plyr1array, plyr2array,plyrInput_obj) {
         let gameBox = document.getElementById(gameBoard[box]);
         gameBox.innerHTML = "";
     }
-    plyr1array.splice(0, plyr1array.length);;
+    //cut array values
+    plyr1array.splice(0, plyr1array.length);
     plyr2array.splice(0, plyr2array.length);
+    //delete values in object
     for (let val in plyrInput_obj) {
         delete plyrInput_obj[val];
     }
+    //reset variables
     result = 0;
     turnCount = 0;
 }
@@ -142,10 +155,36 @@ function resetGame(plyr1array, plyr2array,plyrInput_obj) {
 //computer logic
 
 
-//Check if one of eight ways to win
-function checkWin(object) {
-    //win conditions
+function compMoves() {
 
+}
+
+//give a point val to 2 arrays
+function pntScr(array1,array2) {
+    //1 move = 1pt, 2 in a row = 3pt, 3 in a row 7pt
+    const pointArray = [1, 3, 7];     //prolly not needed
+    let points1 = 0;                   //container for plyr1 move score/point
+    let points2 = 0;                   //container for plyr1 move score/point
+    let indxPos1;                       //index position container
+    let indxPos2;                       //index pos container
+    let indxCount = 0;
+
+    //check arrays for points
+    if (array1.length < 1 || array2.length < 1) { return; }
+    for (let pattern in regxArray) {
+        let patSearch = pattern.test()
+    }
+    /*
+    //get first 2 indexes and add their pts together
+    let pnt1 = Number(array1[0]) + Number(array1[1]);
+    let pnt2 = Number(array2[0]) + Number(array2[1]);
+
+     */
+}
+
+//give each move made by comp a score
+function scoreMove(p1array,p2array) {
+    /*
     //RegEx search patterns for win conditions
     const regXWin1=/1.*\s*\w*2.*\s*\w*3/;
     const regXWin2=/4,*\s*\w*5.*\s*\w*6/;
@@ -155,6 +194,27 @@ function checkWin(object) {
     const regXWin6=/3.*\s*\w*6.*\s*\w*9/;
     const regXWin7=/1.*\s*\w*5.*\s*\w*9/;
     const regXWin8=/3.*\s*\w*5.*\s*\w*7/;
+
+     */
+
+
+}
+
+//Check if one of eight ways to win
+function checkWin(object) {
+    //win conditions
+    /*
+    //RegEx search patterns for win conditions
+    const regXWin1=/1.*\s*\w*2.*\s*\w*3/;
+    const regXWin2=/4,*\s*\w*5.*\s*\w*6/;
+    const regXWin3=/7.*\s*\w*8.*\s*\w*9/;
+    const regXWin4=/1.*\s*\w*4.*\s*\w*7/;
+    const regXWin5=/2.*\s*\w*5.*\s*\w*8/;
+    const regXWin6=/3.*\s*\w*6.*\s*\w*9/;
+    const regXWin7=/1.*\s*\w*5.*\s*\w*9/;
+    const regXWin8=/3.*\s*\w*5.*\s*\w*7/;
+
+     */
 
 
     //put boxid selected by player into an array for each player
@@ -170,15 +230,17 @@ function checkWin(object) {
             aPlayer2.push(box);
         }
     }
-
+    /*
     let regxArray;
     regxArray = [regXWin1,regXWin2,regXWin3,regXWin4,regXWin5,regXWin6,regXWin7,regXWin8];
+
+     */
 
 
     for (let pattern in regxArray) {
         console.log(regxArray[pattern]);
-        let winSearch1 = regxArray[pattern].test(aPlayer1.sort().toString());
-        if (winSearch1) {
+        let winSearch1 = regxArray[pattern].test(aPlayer1.sort().toString());   //returns TF bool
+        if (winSearch1) {                                                       //if pattern string is found in array
             window.alert("winner is Player1!!!");
             result = 1;
             resetGame(aPlayer1,aPlayer2,playerInput_obj);
